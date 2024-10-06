@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Chloropleth</title>
+        <meta charset="UTF-8" />
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Cache-control" content="public" />
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="style.css" />
+        <!-- Tailwind.css -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <!-- Chart.js -->
+        <script src="https://unpkg.com/chart.js"></script>
+        <!-- D3.js -->
+        <script src="https://unpkg.com/d3"></script>
+    </head>
+    <body>
+        <div class="chloropleth-container">
+            <div class="flex-auto map-container">
+                <svg
+                    id="chloropleth-map"
+                    width="100%"
+                    height="100%"
+                    viewBox="-0.5 -192.19200134277344 961 750.6920166015625"
+                    preserveAspectRatio="xMidYMid"
+                ></svg>
+            </div>
+            <div
+                id="visualization-id"
+                class="visualization flex-auto flex-col"
+            >
+                <div
+                    class="flex items-center"
+                    id="visualization-header"
+                >
+                    <span
+                        class="flex-auto text-center"
+                        id="visualization-title"
+                        ></span
+                    >
+                    <div class="w-fit ml-2">
+                        <svg id="visualization-revert-button" onclick="onVisualizationRevertClick()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="26" height="26" viewBox="0 31.7 512 448.5">
+                            <path id="XMLID_3_" d="M255.6,31.7c-70.8,0-134.3,28.5-180.7,74.9L0,31.7v192.1h192.1l-71.6-71.6c35-35,83-56.2,135.9-56.2   c105.8,0,192.1,86.3,192.1,192.1c0,57-25.2,109.1-65.1,144.1l42.3,48C478.6,433,512,364.7,512,288.2   C511.2,146.5,397.2,31.7,255.6,31.7z"/>
+                        </svg>
+                    </div>
+                    <div class="w-fit ml-2">
+                        <svg
+                            id="visualization-close-button"
+                            onclick="onVisualizationCloseClick()"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="26"
+                            height="26"
+                            fill="none"
+                            viewBox="4 4 16 16"
+                        >
+                            <path
+                                d="M5 5L19 19M5 19L19 5"
+                                stroke="#000000"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </div>
+                </div>
+
+                <hr class="mt-2 mb-2" />
+
+                <div class="flex-auto chart-container mt-2">
+                    <div
+                        class="w-full flex px-4 items-center justify-between"
+                    >
+                        <div>Total GHG Emissions:</div>
+                        <div class="min-w-max">
+                            <span id="total-ghg-emissions-id">0</span> <sub>Mt CO₂eq</sub>
+                        </div>
+                    </div>
+                    <hr
+                        class="mt-2 rule-margin border-gray-400"
+                    />
+                    <div class="chart">
+                        <canvas
+                            id="bar-chart"
+                            width="100%"
+                            height="100%"
+                        ></canvas>
+                    </div>
+                    <hr
+                        class="rule-margin border-gray-400"
+                    />
+                    <div class="chart">
+                        <canvas
+                            id="pie-chart-1"
+                            width="100%"
+                            height="100%"
+                        ></canvas>
+                    </div>
+                    <hr
+                        class="rule-margin border-gray-400"
+                    />
+                    <div class="chart">
+                        <canvas
+                            id="pie-chart-2"
+                            width="100%"
+                            height="100%"
+                        ></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div
+                class="flex items-center gap-x-4 w-1/2 min-w-max mt-8 mb-4"
+            >
+                <label
+                    for="date-range"
+                    class="content-mass font-normal text-white flex-none"
+                    >1970</label
+                >
+                <input
+                    oninput="onYearChange()"
+                    id="year-range"
+                    title="Use the slider to observe changes in greenhouse emissions over the years."
+                    type="range"
+                    min="1970"
+                    max="2023"
+                    value="2023"
+                    class="slider grow"
+                />
+                <label
+                    for="date-range"
+                    class="content-mass font-normal text-white flex-none"
+                    >2023</label
+                >
+            </div>
+        </div>
+        <script src="chart-manager.js"></script>
+        <script src="chloropleth-plot.js"></script>
+    </body>
+</html>
